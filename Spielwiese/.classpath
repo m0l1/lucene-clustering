@@ -7,5 +7,14 @@
 	<classpathentry exported="true" kind="lib" path="lib/jdom/jdom-2.0.5-junit.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jdom/jdom-2.0.5-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jdom/jdom-2.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/jsf-2.2/javax.faces.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSF 2.2 (Mojarra 2.2.0)">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+			<attribute name="owner.project.facets" value="jst.jsf"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
