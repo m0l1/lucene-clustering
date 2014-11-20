@@ -20,5 +20,6 @@
 	<classpathentry kind="lib" path="lib/lucene-4.5.0/core/lucene-core-4.5.0.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-4.5.0/queries/lucene-queries-4.5.0.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-4.5.0/queryparser/lucene-queryparser-4.5.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
