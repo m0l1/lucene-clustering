@@ -44,7 +44,7 @@ public class XMLParser {
 	/**
 	 * Diese Methode liefert einen Article mit den Inhalten der übergebenen XML-Datei.
 	 * Pfade mit \ wie z.B. C:\\Users\\ werden automatisch zu C:/Users/ konvertiert.
-	 * @return Article
+	 * @return Article.
 	 * @param Vollständiger Pfad zu einer XML-Datei
 	 */
 	public Article parse(String path){
