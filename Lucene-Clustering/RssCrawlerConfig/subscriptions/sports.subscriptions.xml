@@ -1,0 +1,8 @@
+<subscription 
+   xsi:schemaLocation="http://www.iisys.de/mmis/rssapp RSSSubscription.xsd" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns="http://www.iisys.de/mmis/rssapp">
+  <targetdir path="viewernotification/"/>
+  <pattern country="Germany" language="de" 
+           topic="sports"/>
+</subscription>

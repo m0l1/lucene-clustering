@@ -1,0 +1,28 @@
+<sites xsi:schemaLocation="http://www.iisys.de/mmis/rssapp RSSFeeds.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.iisys.de/mmis/rssapp">
+  <address language="de"
+    link="http://www.spiegel.de/sport/index.rss" 
+    topic="sports" ttl="2" country="Germany"/>
+  <address language="de"
+    link="http://www.faz.net/rss/aktuell/sport/" 
+    topic="sports" ttl="2" country="Germany"/>
+  <address language="de" 
+    link="http://rss.sueddeutsche.de/rss/Sport" 
+    topic="sports" ttl="2" country="Germany"/>
+  <address language="de" 
+    link="http://rss.kicker.de/news/aktuell" 
+    topic="sports" ttl="2" country="Germany"/>
+  <address language="de" 
+    link="http://rss.bild.de/bild-sport.xml" 
+    topic="sports" ttl="2" country="Germany"/>
+  <address language="de" 
+    link="http://www.spox.com/pub/rss/sport.xml" 
+    topic="sports" ttl="2" country="Germany"/>	
+  <address language="de" 
+    link="http://www.sport1.de/de_1/startseite/rss.xml" 
+    topic="sports" ttl="2" country="Germany"/>	
+  <address language="de" 
+    link="http://www.sport1.de/de_1/startseite/rss.xml" 
+    topic="sports" ttl="2" country="Germany"/>		
+</sites>
