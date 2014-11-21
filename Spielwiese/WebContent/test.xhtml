@@ -3,10 +3,19 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets" 
->
-   <ui:define name="title">hello</ui:define>
+    xmlns:p="http://primefaces.org/ui">
+   <ui:define name="title">Test</ui:define>
 
     <ui:define name="content">
-        Seiteninhalt :O
-    </ui:define>
+		<p:dataTable  value="#{ArticleManagedBean.clusterList}" var="clusterList">
+    		<p:column>
+    		 <details>
+      		   <summary>
+      		     <h:outputText value="#{clusterList.topArticle.title}"></h:outputText>
+    		   </summary>
+    		 </details>
+    		</p:column>
+		</p:dataTable>
+   	</ui:define>
+   	
 </ui:composition>
