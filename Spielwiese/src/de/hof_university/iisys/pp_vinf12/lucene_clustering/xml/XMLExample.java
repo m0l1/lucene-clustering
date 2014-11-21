@@ -1,5 +1,4 @@
 package de.hof_university.iisys.pp_vinf12.lucene_clustering.xml;
-import java.util.Map;
 
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.data.Article;
 
