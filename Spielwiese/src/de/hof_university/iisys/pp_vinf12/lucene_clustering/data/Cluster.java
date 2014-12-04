@@ -6,7 +6,7 @@ import java.util.List;
 //@author ckoepf
 //change 06.11.2014
 
-public class Cluster {
+public class Cluster implements java.io.Serializable {
 	
 	private Article topArticle;
 	private List<Article> articles;
@@ -38,6 +38,6 @@ public class Cluster {
 	public void setLastChange(GregorianCalendar lastChange) {
 		this.lastChange = lastChange;
 	}
-
+	
 	
 }
