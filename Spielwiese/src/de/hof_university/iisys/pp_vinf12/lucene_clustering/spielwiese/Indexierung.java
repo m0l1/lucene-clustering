@@ -14,26 +14,28 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.util.Version;
+import org.apache.lucene.analysis.*;
+
 
 
 // Fügt jeden Artikel zum Index hinzu
 
 public class Indexierung {
 	public static void main (String[] args) throws Exception {
-
 		// Neuen Index erzeugen		
 		SimpleFSDirectory dir = new SimpleFSDirectory(new File(FileLuceneExampleWriter.INDEX_PATH));
 		DirectoryReader reader = DirectoryReader.open(dir);
 		IndexSearcher searcher = new IndexSearcher(reader);
-
+		StandardAnalyser analyzer = new StandardAnalyser();
+		String indexPath = "";
 		boolean create = true;
-		IndexWriter writer = new IndexWriter(indexPath, new StandardAnalyser(Version.LUCENE_45), true);
+		IndexWriter writer = new IndexWriter(indexPath, new StandardAnalyser(Version.LUCENE_45, analyzer), true);
 
 		String[] search = new String[3];
 
-	};
+	
 
-	writer.optimize();
+	 //writer.optimize();
 	writer.close();
 }
 
