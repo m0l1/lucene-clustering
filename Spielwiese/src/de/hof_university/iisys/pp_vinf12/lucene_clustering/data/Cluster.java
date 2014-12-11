@@ -8,10 +8,16 @@ import java.util.List;
 
 public class Cluster implements java.io.Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5126206769651649559L;
 	private Article topArticle;
 	private List<Article> articles;
 	private GregorianCalendar created;
 	private GregorianCalendar lastChange;
+	//TODO entfernen!!
+	private String test = "testCluster";
 	//TODO Variable Vektor-Space-Model?
 	
 	public Article getTopArticle() {
@@ -37,6 +43,12 @@ public class Cluster implements java.io.Serializable {
 	}
 	public void setLastChange(GregorianCalendar lastChange) {
 		this.lastChange = lastChange;
+	}
+	public String getTest() {
+		return test;
+	}
+	public void setTest(String test) {
+		this.test = test;
 	}
 	
 	

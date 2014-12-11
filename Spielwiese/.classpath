@@ -2,24 +2,64 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry exported="true" kind="lib" path="lib/jdom/jdom-2.0.5-contrib.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jdom/jdom-2.0.5-javadoc.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jdom/jdom-2.0.5-junit.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jdom/jdom-2.0.5-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jdom/jdom-2.0.5.jar"/>
-	<classpathentry kind="lib" path="lib/jsf-2.2/javax.faces.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSF 2.2 (Mojarra 2.2.0)">
+	<classpathentry exported="true" kind="lib" path="lib/jdom/jdom-2.0.5-contrib.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-			<attribute name="owner.project.facets" value="jst.jsf"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/lucene-4.5.0/analysis/common/lucene-analyzers-common-4.5.0.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-4.5.0/core/lucene-core-4.5.0.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-4.5.0/queries/lucene-queries-4.5.0.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-4.5.0/queryparser/lucene-queryparser-4.5.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jdom/jdom-2.0.5-javadoc.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="lib/jdom/jdom-2.0.5-junit.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="lib/jdom/jdom-2.0.5-sources.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="lib/jdom/jdom-2.0.5.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="lib/jsf-2.2/javax.faces.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSF 2.2 (Mojarra 2.2.0)">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.jsf"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="lib/lucene-4.5.0/analysis/common/lucene-analyzers-common-4.5.0.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="lib/lucene-4.5.0/core/lucene-core-4.5.0.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="lib/lucene-4.5.0/queries/lucene-queries-4.5.0.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="lib/lucene-4.5.0/queryparser/lucene-queryparser-4.5.0.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

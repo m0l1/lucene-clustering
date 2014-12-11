@@ -15,10 +15,10 @@ public class DatenTest {
 		//xml parser anlegen
 		XMLParser parser = new XMLParser();
 		// Artikel anlegen und in eine Liste hinzufügen
-		Article a1 = parser.parse("");
-		Article a2 = parser.parse("");
-		Article a3 = parser.parse("");
-		Article a4 = parser.parse("");
+		Article a1 = parser.parse("C:/xml/1.xml");
+		Article a2 = parser.parse("C:/xml/2.xml");
+		Article a3 = parser.parse("C:/xml/3.xml");
+		Article a4 = parser.parse("C:/xml/4.xml");
 		List<Article> articles1 = new ArrayList<Article>();
 		List<Article> articles2 = new ArrayList<Article>();
 		articles1.add(a1);
@@ -26,8 +26,8 @@ public class DatenTest {
 		articles2.add(a3);
 		articles2.add(a4);
 		//Cluster befüllen
-		c1.setTopArticle(parser.parse(""));
-		c2.setTopArticle(parser.parse(""));
+		c1.setTopArticle(parser.parse("C:/xml/5.xml"));
+		c2.setTopArticle(parser.parse("C:/xml/6.xml"));
 		c1.setArticles(articles1);
 		c2.setArticles(articles2);
 		//Cluster der Liste hinzufügen

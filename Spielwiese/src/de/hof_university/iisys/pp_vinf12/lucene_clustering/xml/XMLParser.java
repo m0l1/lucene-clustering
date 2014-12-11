@@ -65,7 +65,8 @@ public class XMLParser {
 		article.setText(item.getChildText("ExtractedText"));
 		article.setTitle(item.getChildText("title"));
 		article.setDescription(item.getChildText("description"));
-		article.setDate(parseDate(item.getChildText("pubDate")));
+		//TODO Datum ist scheinbar nicht überall gleich?
+		//article.setDate(parseDate(item.getChildText("pubDate")));
 		return article;
 	}
 	

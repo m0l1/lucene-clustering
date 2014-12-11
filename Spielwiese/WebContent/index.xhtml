@@ -1,34 +1,29 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html"
+<ui:composition template="masterTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets" 
     xmlns:p="http://primefaces.org/ui">
+    
+   
+   <ui:define name="title">Test</ui:define>
 
-<h:body>
-	<link type="text/css" rel="stylesheet" href="/TestJSF/resources/css/style.css" />
-</h:body>
-
-<p:outputLabel id="ub1" value="Test ArrayList + Css + Tables"></p:outputLabel>
-<br/>
-<br/>
-<details>
-<summary>TEST</summary>
-<p>
-<p:dataTable  value="#{viewEmployeesManagedBean.empC.employeesList}" var="employees">
-    <p:column>
-        <f:facet name="header">
-            <h:outputText value="Employee ID"></h:outputText>
-        </f:facet>
-        <h:outputText value="#{employees.employeeId}"></h:outputText>
-    </p:column>
-    <p:column>
-        <f:facet name="header">
-            <h:outputText value="Employee Name"></h:outputText>
-        </f:facet>
-        <h:outputText value="#{employees.employeeName}"></h:outputText>
-    </p:column>
-</p:dataTable>
-</p>
-</details>
-</html>
+    <ui:define name="content">
+		<h:dataTable  value="#{amb.clusterWrapper.clusterList}" var="cluster">
+    		<h:column>
+    			<details>
+      		   		<summary>
+      		     		<h:outputText value="#{cluster.topArticle.title}"></h:outputText>
+      		     	</summary>
+      		     	<h:dataTable  value="#{cluster.articles}" var="article">
+    					<h:column>
+    						<h:outputText value="#{article.title}"></h:outputText>
+    						<br />
+    					</h:column>
+					</h:dataTable>
+      		     </details>
+    		</h:column>
+		</h:dataTable>
+   	</ui:define>
+   	
+</ui:composition>
