@@ -43,10 +43,12 @@ h1 {
 	color: #c00;
 	background-color: #fff;
 }
+
 /* Ende Navigation */
 
 /* Details - Die aufklappbaren Elemente */
 details {
+  font-size: 20px;
   border-radius: 3px;
   color: #000;
   background: #f2f2f2;
@@ -61,26 +63,16 @@ summary {
   outline: none;
 }
 
-#custom-marker summary {
-  font-size: 17px;
-  vertical-align: top;
+details a:link, a:visited, a:hover {
+    color: #000;
 }
 
-#custom-marker summary::-webkit-details-marker {
-  display: none;
+summary a:link, summary a:visited, summary a:hover {
+    color: #FFF;
 }
 
-#custom-marker summary:before {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin-right: 8px;
-  content: "";
-  background-repeat: no-repeat;
-  background-position: 0 0;
-}
-
-#custom-marker[open] summary:before {
-  background-position: -18px 0;
+details img{
+	height: 20px;
+    width:auto;
 }
 /* Ende Details */

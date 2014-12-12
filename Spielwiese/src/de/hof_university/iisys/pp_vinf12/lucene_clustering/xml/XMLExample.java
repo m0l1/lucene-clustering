@@ -7,6 +7,6 @@ import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.DatenTest;
 public class XMLExample {
 	public static void main(String[] args) {
 		List<Cluster> clusterList = DatenTest.getData();
-		System.out.println(clusterList.get(1).getTopArticle().getText());
+		System.out.println(clusterList.get(1).getTopArticle().getDate());
 	}
 }

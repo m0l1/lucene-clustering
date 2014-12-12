@@ -13,11 +13,15 @@
     		<h:column>
     			<details>
       		   		<summary>
-      		     		<h:outputText value="#{cluster.topArticle.title}"></h:outputText>
+      		   			#{cluster.topArticle.title} | 
+      		     		<h:outputLink value="#{cluster.topArticle.link}">Link</h:outputLink> | 
+      		     		<h:graphicImage value="#{cluster.topArticle.logo}" />
       		     	</summary>
       		     	<h:dataTable  value="#{cluster.articles}" var="article">
     					<h:column>
-    						<h:outputText value="#{article.title}"></h:outputText>
+    						#{article.title} | 
+    						<h:outputLink value="#{article.link}">Link</h:outputLink> | 
+      		     			<h:graphicImage value="#{article.logo}" />
     						<br />
     					</h:column>
 					</h:dataTable>

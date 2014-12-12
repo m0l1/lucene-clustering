@@ -58,20 +58,21 @@ public class XMLParser {
 		Element channel = root.getChild("channel");
 		article.setLanguage(channel.getChildText("language"));
 		article.setSource(channel.getChildText("title"));
-		article.setLogo(channel.getChild("image").getChildText("url"));
-
+		if(channel.getChild("image") != null)
+			article.setLogo(channel.getChild("image").getChildText("url"));
 		Element item = root.getChild("channel").getChild("item");
 		article.setLink(item.getChildText("link"));
 		article.setText(item.getChildText("ExtractedText"));
 		article.setTitle(item.getChildText("title"));
 		article.setDescription(item.getChildText("description"));
-		//TODO Datum ist scheinbar nicht überall gleich?
 		//article.setDate(parseDate(item.getChildText("pubDate")));
 		return article;
 	}
 	
 	private GregorianCalendar parseDate(String dateString){
+		System.out.println(dateString);
 		dateString = dateString.substring(5);
+		System.out.println(dateString);
 		GregorianCalendar calender = new GregorianCalendar();
 		Date date = new Date();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss z");
