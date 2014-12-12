@@ -1,50 +1,41 @@
 package de.hof_university.iisys.pp_vinf12.lucene_clustering.spielwiese;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.document.LongField;
-import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.store.IndexInput;
 import org.apache.lucene.util.Version;
 
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.data.Article;
 
+// @author ckoepf
+// last modified: 12.12.2014
+
 public class Indexing {
 	
-	private void Indexing() { }
 		public static void main (String[] args) throws IOException {
 		try {
 			String indexPath = "index";
 			String docsPath = null;
 			boolean create = true;
-			
-			final File docDir = new File(docsPath);
-			if(!docDir.exists() || !docDir.canRead()) {
-				System.out.println("Document directory '" + docDir.getAbsolutePath() + "' does not exist or is not readable!");
-				System.exit(1);
-			}
+			// hier wird ja dann normalerweise ein Article aus dem XML-Parser kommen
+			Article article = new Article("Haribo macht Kinder froh", "und erwachsene ebenso", "Spiegel", "de", "fjkdsvnajidfgnfmdagnjdfaghdruia", "Pfad", "link", new GregorianCalendar());
 			
 			Directory dir = FSDirectory.open(new File(indexPath));
 
+			@SuppressWarnings("deprecation")
 			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_CURRENT);
+			@SuppressWarnings("deprecation")
 			IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
 			
 			if (create) {
@@ -57,7 +48,7 @@ public class Indexing {
 			}
 			
 			IndexWriter writer = new IndexWriter(dir, config);
-			indexDocs(writer, docDir);
+			indexDocs(writer, article);
 			
 			writer.close();
 			
@@ -73,61 +64,24 @@ public class Indexing {
 		// Diese Methode indexiert nur ein Dokument per input-File, um das zu Beschleunigen, mehrere Dokumente ins input-File
 		// @TODO: Benchmark Modul
 		
-		static void indexDocs(IndexWriter writer, File file) throws IOException {
-			if (file.canRead()) {
-				if (file.isDirectory()) {
-					String[] files = file.list();
-					if(files !=null) {
-						for (int i = 0; i < files.length; i++) {
-							indexDocs(writer, new File(file, files[i]));
-						}
-					}
-				}
-				
-				else {
-					FileInputStream fis;
-					try {
-						fis = new FileInputStream(file);
-					}
-					catch (FileNotFoundException fnfe) {
-						return;
-					}
-					try {
-						Document doc = new Document();
-						Field pathField = new StringField("path", file.getPath(), Field.Store.YES);
-						doc.add(pathField);
-						doc.add(new LongField("modified", file.lastModified(), Field.Store.NO));
-						doc.add(new TextField("title", title, Field.Store.YES));
-						doc.add(new TextField("description", description, Field.Store.YES));
-						doc.add(new TextField("source", source, Field.Store.YES));
-						doc.add(new TextField("language", language, Field.Store.YES));
-						doc.add(new TextField("text", text, Field.Store.YES));
-						doc.add(new TextField("logo", logo, Field.Store.YES));
-						doc.add(new TextField("link", link, Field.Store.YES));
-						doc.add(new TextField("date", date, Field.Store.YES));
-						doc.add(new TextField("contents", new BufferedReader(new InputStreamReader(fis, StandardCharsets.UTF_8))));
-					}
-					finally {
-						fis.close();
-					}
-				}
-			}
+		static void indexDocs(IndexWriter writer, Article article) throws IOException {
+			Document doc = new Document();
+//			Field pathField = new StringField("path", file.getPath(), Field.Store.YES);
+//			doc.add(pathField);
+//			doc.add(new LongField("modified", title.lastModified(), Field.Store.NO));
+			doc.add(new TextField("title", article.getTitle(), Field.Store.YES));
+			doc.add(new TextField("description", article.getDescription(), Field.Store.YES));
+			doc.add(new TextField("source", article.getSource(), Field.Store.YES));
+			doc.add(new TextField("language", article.getLanguage(), Field.Store.YES));
+			doc.add(new TextField("text", article.getText(), Field.Store.YES));
+			doc.add(new TextField("logo", article.getLogo(), Field.Store.YES));
+			doc.add(new TextField("link", article.getLink(), Field.Store.YES));
+			// TODO: Marcel, das ist jetzt dein Problem. Wir brauchen hier Date, haben aber GregCal
+//			doc.add(new TextField("date", article.toString(), Field.Store.YES));
+//			doc.add(new TextField("contents", article.getText()));
+			
 			
 		}
 		
-		private static void parseArticle(Article article) {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("object.data"));
 
-			Article article = (Article) IndexInput.readObject();
-
-			String titel = (String) ois.readObject();
-			String description = (String) ois.readObject();
-			String source = (String) ois.readObject();
-			String language = (String) ois.readObject();
-			String text = (String) ois.readObject();
-			String logo = (String) ois.readObject();
-			String link = (String) ois.readObject();
-			Date date = (Date) ois.readObject();
-		
-		}
-	}
+}

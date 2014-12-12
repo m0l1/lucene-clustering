@@ -3,7 +3,7 @@ package de.hof_university.iisys.pp_vinf12.lucene_clustering.data;
 import java.util.GregorianCalendar;
 
 //@author ckoepf
-//change 06.11.2014
+//last modified: 12.12.2014
 
 public class Article {
 	
@@ -17,7 +17,22 @@ public class Article {
 	private String logo;
 	private String link;
 	private GregorianCalendar date;
-	
+
+	public Article(String title, String description, String source,
+			String language, String text, String logo, String link,
+			GregorianCalendar date) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.source = source;
+		this.language = language;
+		this.text = text;
+		this.logo = logo;
+		this.link = link;
+		this.date = date;
+	}
+
+
 	public String getTitle() {
 		return title;
 	}
@@ -48,6 +63,8 @@ public class Article {
 	public void setText(String text) {
 		this.text = text;
 	}
+	
+	//Defaultwert für XML-Dateien die kein Logo haben, setzen
 	public String getLogo() {
 		return logo;
 	}
