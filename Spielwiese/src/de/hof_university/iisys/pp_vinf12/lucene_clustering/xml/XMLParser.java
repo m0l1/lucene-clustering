@@ -1,7 +1,7 @@
 package de.hof_university.iisys.pp_vinf12.lucene_clustering.xml;
 
 
-// @author Maximilian Louis
+// @author Maximilian Louis, Dominick Oeckel
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
