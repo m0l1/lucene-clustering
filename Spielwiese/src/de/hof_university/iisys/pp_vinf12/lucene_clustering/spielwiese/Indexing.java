@@ -23,7 +23,7 @@ import org.apache.lucene.util.Version;
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.data.Article;
 
 // @author ckoepf
-// last modified: 12.12.2014
+// last modified: 18.12.2014
 
 public class Indexing {
 	
