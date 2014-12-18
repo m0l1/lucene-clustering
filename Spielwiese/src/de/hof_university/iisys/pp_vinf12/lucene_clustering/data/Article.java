@@ -18,6 +18,10 @@ public class Article {
 	private String link;
 	private GregorianCalendar date;
 
+	//Wird für XML-Parser benötigt!
+	public Article(){
+	}
+	
 	public Article(String title, String description, String source,
 			String language, String text, String logo, String link,
 			GregorianCalendar date) {

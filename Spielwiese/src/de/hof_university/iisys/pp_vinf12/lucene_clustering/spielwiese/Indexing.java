@@ -2,7 +2,11 @@ package de.hof_university.iisys.pp_vinf12.lucene_clustering.spielwiese;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
+
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.xml.*;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -26,10 +30,21 @@ public class Indexing {
 		public static void main (String[] args) throws IOException {
 		try {
 			String indexPath = "index";
+
 			String docsPath = null;
 			boolean create = true;
 			// hier wird ja dann normalerweise ein Article aus dem XML-Parser kommen
 			Article article = new Article("Haribo macht Kinder froh", "und erwachsene ebenso", "Spiegel", "de", "fjkdsvnajidfgnfmdagnjdfaghdruia", "Pfad", "link", new GregorianCalendar());
+			
+//			FileIterator fileIterator = new FileIterator("articlePath");
+//			fileIterator.listFiles();
+//			List<String> fileList = fileIterator.getFileList();
+//			List<Article> articleList = new ArrayList<Article>();
+//			XMLParser xmlParser = new XMLParser();
+//			for (String path : fileList) {
+//			    articleList.add(xmlParser.parse(path));
+//			}
+			
 			
 			Directory dir = FSDirectory.open(new File(indexPath));
 
@@ -48,6 +63,11 @@ public class Indexing {
 			}
 			
 			IndexWriter writer = new IndexWriter(dir, config);
+			
+//			for (Article article : articleList) {
+//			    indexDocs(writer, article);
+//			}
+			
 			indexDocs(writer, article);
 			
 			writer.close();
