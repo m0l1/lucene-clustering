@@ -4,11 +4,11 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets" 
     xmlns:p="http://primefaces.org/ui">
-   
-    <ui:define name="title">Ähnliche Artikel</ui:define>
-	
+    
+    <ui:define name="title">Gleiche Artikel</ui:define>
+
     <ui:define name="content">
-       <f:event type="preRenderView" listener="#{amb.onPageLoadIndex}"/>
+       <f:event type="preRenderView" listener="#{amb.onPageLoadEqualArticles}"/>
        <h:body>
 		<h:dataTable  value="#{amb.clusterList}" var="cluster">
     		<h:column>
