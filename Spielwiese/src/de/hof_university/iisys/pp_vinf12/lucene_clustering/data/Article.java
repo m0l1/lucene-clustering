@@ -14,7 +14,7 @@ public class Article {
 	private String source;
 	private String language;
 	private String text;
-	private String logo;
+	private String logo = "/resources/default.jpg";
 	private String link;
 	private GregorianCalendar date;
 
@@ -73,7 +73,8 @@ public class Article {
 		return logo;
 	}
 	public void setLogo(String logo) {
-		this.logo = logo;
+		if(logo != "")
+			this.logo = logo;
 	}
 	public String getLink() {
 		return link;

@@ -8,7 +8,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -65,17 +68,15 @@ public class XMLParser {
 		article.setText(item.getChildText("ExtractedText"));
 		article.setTitle(item.getChildText("title"));
 		article.setDescription(item.getChildText("description"));
-		//article.setDate(parseDate(item.getChildText("pubDate")));
+		article.setDate(parseDate(item.getChildText("pubDate")));
 		return article;
 	}
 	
-	private GregorianCalendar parseDate(String dateString){
-		System.out.println(dateString);
+	private GregorianCalendar parseDate(String dateString) {
 		dateString = dateString.substring(5);
-		System.out.println(dateString);
 		GregorianCalendar calender = new GregorianCalendar();
 		Date date = new Date();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss z");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
 		try {
 			date = simpleDateFormat.parse(dateString);
 		} catch (ParseException e) {
