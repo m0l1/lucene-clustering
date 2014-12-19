@@ -1,0 +1,46 @@
+<ui:composition template="masterTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets" 
+    xmlns:p="http://primefaces.org/ui">
+    
+   
+   <ui:define name="title">Test</ui:define>
+
+    <ui:define name="content">
+	  <h:body>        
+		<h:form>
+  		 <h:inputText id="search" value="#{amb.searchString}"  onkeypress="if (event.keyCode == 13) {onchange(event); return false;}"  onchange="return event.keyCode !== undefined" valueChangeListener="#{amb.searchStringChanged}">
+     		 <f:ajax execute="search" render="output" /> 
+   		 </h:inputText>
+   		 &#160;
+  		 <h:commandButton value="Suchen" action="#{amb.searchButtonUsed}">
+			 <f:ajax execute="search" render="output"></f:ajax>
+   		 </h:commandButton>
+   		 <br />
+   		 <img alt="" height="140" src="../resources/mn.png" width="300" />
+   		 <h:dataTable id="output"  value="#{amb.clusterList}" var="cluster">
+    		<h:column>
+    			<details>
+      		   		<summary>
+      		   			#{cluster.topArticle.title} | 
+      		     		<h:outputLink value="#{cluster.topArticle.link}">Link</h:outputLink> | 
+      		     		<h:graphicImage value="#{cluster.topArticle.logo}" />
+      		     	</summary>
+      		     	<h:dataTable  value="#{cluster.articles}" var="article">
+    					<h:column>
+    						#{article.title} | 
+    						<h:outputLink value="#{article.link}">Link</h:outputLink> | 
+      		     			<h:graphicImage value="#{article.logo}" />
+    						<br />
+    					</h:column>
+					</h:dataTable>
+      		     </details>
+    		</h:column>
+		</h:dataTable>
+		</h:form>
+      </h:body>
+   	</ui:define>
+   	
+</ui:composition>
