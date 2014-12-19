@@ -1,13 +1,15 @@
 package de.hof_university.iisys.pp_vinf12.lucene_clustering.gui;
 
 import java.util.*;
+
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.data.*;
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.xml.XMLParser;
 
 //@author mlouis doeckl
 
-public class DatenTest {
-	public static List<Cluster> getData(){
+public class DatenTest implements BeanData {
+	@Override
+	public List<Cluster> getClusterList() {
 		//Clusterliste und Cluster vorbereiten
 		List<Cluster> clusterList  = new ArrayList<Cluster>();
 		Cluster c1 = new Cluster();
@@ -36,8 +38,28 @@ public class DatenTest {
 		
 		return clusterList;
 	}
-	
-	public static List<Cluster> getData2(){
+
+	public List<Cluster> getClusterList(String searchString) {
+		List<Cluster> clusterList = this.getClusterList();
+		List<Cluster> returnClusterList = new ArrayList<Cluster>();
+		
+	    for(Cluster cluster : clusterList){
+	    	//Wenn der Titel des TopArtikels das im Suchfeld eingegebene enthält
+	    	if(cluster.getTopArticle().getTitle().contains(searchString)){
+	    		returnClusterList.add(cluster);
+	    	//Anderenfalls kann es immernoch in einem untergeordneten Artikel vorkommen
+	    	} else {
+	    		for(Article article : cluster.getArticles()){
+	    			if(article.getTitle().contains(searchString)){
+	    	    		returnClusterList.add(cluster);
+	    	    	}
+	    		}
+	    	}
+	    }
+		return returnClusterList;
+	}
+
+	public List<Cluster> getEqualClusterList() {
 		//Clusterliste und Cluster vorbereiten
 		List<Cluster> clusterList  = new ArrayList<Cluster>();
 		Cluster c1 = new Cluster();
