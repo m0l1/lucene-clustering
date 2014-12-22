@@ -3,16 +3,32 @@ package de.hof_university.iisys.pp_vinf12.lucene_clustering.data;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-//@author ckoepf
-//change 06.11.2014
+/**
+ * 
+ * Ein Cluster aus Artikeln wird angelegt.
+ * Diese Klasse wird verwendet, wenn Articles ausgelesen werden.
+ * Dabei werden Artikel gemäß ihrer Ähnlichkeit in einen Cluster zusammengefasst.
+ * 
+ * @author CKöpf
+ * @version 1.1
+ * 
+ */
 
 public class Cluster {
 	
+	/** Artikel, der den Cluster in der Präsentation vertritt */
 	private Article topArticle;
+	/** gesamte Liste der Artikel im Cluster */
 	private List<Article> articles;
+	/** Erstellzeitpunkt des Clusters */
 	private GregorianCalendar created;
+	/** Letzte Änderung des Clusters */
 	private GregorianCalendar lastChange;
+	//TODO entfernen!!
+	// private String test = "testCluster";
+	// eiskalt getan. irgendwelche unerwünschten Ergebnisse?
 	//TODO Variable Vektor-Space-Model?
+	// TODO Konstruktor? Also bitte..
 	
 	public Article getTopArticle() {
 		return topArticle;
@@ -38,6 +54,5 @@ public class Cluster {
 	public void setLastChange(GregorianCalendar lastChange) {
 		this.lastChange = lastChange;
 	}
-
 	
 }
