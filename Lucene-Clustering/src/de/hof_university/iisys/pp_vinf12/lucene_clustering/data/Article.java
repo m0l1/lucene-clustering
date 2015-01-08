@@ -2,55 +2,49 @@ package de.hof_university.iisys.pp_vinf12.lucene_clustering.data;
 
 import java.util.GregorianCalendar;
 
-/**
- * 
- * Diese Klasse legt einen neuen Article an.
- * Artikel-Objekte werden beim Parsen von XML-Dateien und beim Auslesen des Indexes erstellt.
- * Die Klasse gewährleistet in erster Linie die Sicherheit der Attribute für die Präsentation.
- * 
- * @author CKöpf, JTrautmann
- * @version 1.1
- * 
- */
+//@author ckoepf
+//last modified: 12.12.2014
 
 public class Article {
 	
-	/** Überschrift des Artikels */
+	//TODO Kommentar hinzufügen
+
 	private String title;
-	/** Beschreibung des Artikels */
 	private String description;
-	/** Zeitung/Magazin des Artikels */
 	private String source;
-	/** Sprache des Artikels */
 	private String language;
-	/** Inhalt des Artikels */
 	private String text;
-	/** Logo des Veröffentlichers, wenn keines vorhanden, wird das Standardbild verwendet */
 	private String logo = "/resources/default.jpg";
-	/** Link zum Originalartikel */
 	private String link;
-	/** Veröffentlichungsdatum */
 	private GregorianCalendar date;
-	
+	private int clusterID;
+
 	//Wird für XML-Parser benötigt!
-	/** Default-Konstruktor */
 	public Article(){
 	}
 	
-	/** Vollständiger Konstruktor, alle Member werden initialisiert */
+
+	
 	public Article(String title, String description, String source,
 			String language, String text, String logo, String link,
-			GregorianCalendar date) {
+			GregorianCalendar date, int clusterID) {
 		super();
 		this.title = title;
 		this.description = description;
 		this.source = source;
 		this.language = language;
 		this.text = text;
-		this.setLogo(logo);
+		this.logo = logo;
 		this.link = link;
 		this.date = date;
+		this.clusterID = clusterID;
 	}
+	public Article(String title, String description, String source,
+			String language, String text, String logo, String link,
+			GregorianCalendar date) {
+		this(title, description, source, language, text, logo, link, date, 0);
+	}
+
 
 	public String getTitle() {
 		return title;
@@ -82,6 +76,8 @@ public class Article {
 	public void setText(String text) {
 		this.text = text;
 	}
+	
+	//Defaultwert für XML-Dateien die kein Logo haben, setzen
 	public String getLogo() {
 		return logo;
 	}
@@ -101,5 +97,13 @@ public class Article {
 	public void setDate(GregorianCalendar date) {
 		this.date = date;
 	}
+	
+	public int getClusterID() {
+		return clusterID;
+	}
+	public void setClusterID(int clusterID) {
+		this.clusterID = clusterID;
+	}
 
+	
 }
