@@ -26,7 +26,6 @@ public class FileIterator {
 	        if (file.isDirectory()) {
 	            listFiles(file.listFiles()); 
 	        } else {
-	            System.out.println(file.getAbsolutePath());
 	            fileList.add(file.getAbsolutePath());
 	        }
 	    }

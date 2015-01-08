@@ -46,8 +46,13 @@ public class XMLParser {
 	 * @return Article.
 	 * @param Vollständiger Pfad zu einer XML-Datei
 	 */
+	
 	public Article parse(String path){
 		File file = new File(path.replace("\\", "/"));
+		return parse(file);
+	}
+	
+	public Article parse(File file){
 		try {
 			doc = builder.parse(file);
 			org.jdom2.Document jDoc = domBuilder.build(doc);
