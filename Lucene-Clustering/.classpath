@@ -40,5 +40,9 @@
 			<attribute name="owner.project.facets" value="jst.jsf"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/lucene-4.5.0/analysis/common/lucene-analyzers-common-4.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-4.5.0/core/lucene-core-4.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-4.5.0/queries/lucene-queries-4.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-4.5.0/queryparser/lucene-queryparser-4.5.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

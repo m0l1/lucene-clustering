@@ -10,6 +10,7 @@ public class FileIterator {
 	
 	public FileIterator(String path){
 		this.path = new File(path).listFiles();
+		listFiles(this.path);
 	}
 	
 	public List<String> getFileList() {
@@ -22,6 +23,7 @@ public class FileIterator {
 	
 	//Speichert alle Dateien aller Unterordner in der Liste fileList
 	private void listFiles(File[] files) {
+		System.out.println("listFiles");
 	    for (File file : files) {
 	        if (file.isDirectory()) {
 	            listFiles(file.listFiles()); 
