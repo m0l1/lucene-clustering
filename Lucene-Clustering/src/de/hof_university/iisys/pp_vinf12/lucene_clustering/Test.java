@@ -73,7 +73,7 @@ public class Test {
 		Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_45);
 		QueryParser queryParser = new QueryParser(Version.LUCENE_45, "title", analyzer);
 		
-		Query query = queryParser.parse("a");
+		Query query = queryParser.parse("d*");
 		TopDocs td = searcher.search(query, 10);
 		ScoreDoc[] sd = td.scoreDocs;
 		for (int j = 0; j < sd.length; ++j) {

@@ -58,7 +58,7 @@ public class ArticleIndexer {
 		doc.add(new TextField("link", article.getLink(), Field.Store.YES));
 		doc.add(new TextField("description", article.getDescription(), Field.Store.YES));
 		doc.add(new TextField("date", new SimpleDateFormat
-				("yyyy.MM.dd.HH.mm.ss").format(article.getDate()), Field.Store.YES));
+				("yyyy.MM.dd.HH.mm.ss").format(article.getDate().getTime()), Field.Store.YES));
 		doc.add(new IntField("clusterID", article.getClusterID(), Field.Store.YES));
 		
 		return doc;

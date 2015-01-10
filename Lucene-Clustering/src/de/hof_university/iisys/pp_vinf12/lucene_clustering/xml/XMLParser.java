@@ -79,6 +79,17 @@ public class XMLParser {
 		if (date != null) {
 			article.setDate(parseDate(date));
 		}
+		// sonst Zeitpunkt des Parsens, das passt wenigstens ungefähr
+		else {
+			article.setDate(
+					parseDate(
+							new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z",
+									Locale.ENGLISH).format(
+											new GregorianCalendar().getTime()
+											)
+							)
+					);
+		}
 		
 		return article;
 	}
