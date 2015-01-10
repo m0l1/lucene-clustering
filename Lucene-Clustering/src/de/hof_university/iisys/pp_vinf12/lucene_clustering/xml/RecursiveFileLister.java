@@ -3,12 +3,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileIterator {
+public class RecursiveFileLister {
 	
 	List<String> fileList = new ArrayList<String>();
 	File[] path; // Oberster Ordner über den iteriert wird
 	
-	public FileIterator(String path){
+	public RecursiveFileLister(String path){
 		this.path = new File(path).listFiles();
 		listFiles(this.path);
 	}

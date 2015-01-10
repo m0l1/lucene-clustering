@@ -27,22 +27,35 @@ import org.apache.lucene.util.Version;
 
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.data.Article;
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.lucene.ArticleIndexer;
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.xml.FileIterator;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.xml.RecursiveFileLister;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.xml.FileLineLister;
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.xml.XMLParser;
 
 public class Test {
 	
 	public static void main(String[] args) throws IOException, ParseException {
-		FileIterator it = new FileIterator("testfiles");
+		RecursiveFileLister it = new RecursiveFileLister("testfiles");
 		XMLParser parser = new XMLParser();
+		FileLineLister puller = new FileLineLister();
 		ArticleIndexer indexer = new ArticleIndexer("lucene.index");
 		
 		List<Article> articles = new ArrayList<Article>();
-		List<String> files = it.getFileList();
+		List<String> notificationFiles = it.getFileList();
+		List<String> xmlFiles = new ArrayList<String>();
+		System.out.println("Files: " + notificationFiles.size());
 		
-		System.out.println("Files: " + files.size());
+		for(String file : notificationFiles) {
+			List<String> tmpList = new ArrayList<>();
+			tmpList = puller.listXMLFilesInFile(file);
+			for(String tmp : tmpList) {
+				xmlFiles.add(tmp);
+			}
+			
+		}
 		
-		for(String file : files) {
+		System.out.println("XML-Files: " + xmlFiles.size());
+		
+		for(String file : xmlFiles) {
 			Article article = parser.parse(file);
 			articles.add(article);		
 		}
