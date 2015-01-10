@@ -73,7 +73,13 @@ public class XMLParser {
 		article.setText(item.getChildText("ExtractedText"));
 		article.setTitle(item.getChildText("title"));
 		article.setDescription(item.getChildText("description"));
-		article.setDate(parseDate(item.getChildText("pubDate")));
+		
+		// date nur parsen, falls tatsaechlich eines in der Datei steht
+		String date = item.getChildText("pubDate");
+		if (date != null) {
+			article.setDate(parseDate(date));
+		}
+		
 		return article;
 	}
 	
