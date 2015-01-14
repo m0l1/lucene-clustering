@@ -10,8 +10,9 @@
     <ui:define name="content">
        <f:event type="preRenderView" listener="#{amb.onPageLoadEqualArticles}"/>
        <h:body>
-		<h:dataTable  value="#{amb.clusterList}" var="cluster">
+		<h:dataTable id="table" value="#{amb.clusterList}" var="cluster">
     		<h:column>
+    		 	<f:facet name="header"> Artikel </f:facet>
     			<details>
       		   		<summary>
       		   			#{cluster.topArticle.title} | 

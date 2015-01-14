@@ -17,12 +17,21 @@ import de.hof_university.iisys.pp_vinf12.lucene_clustering.test.DataTest;
 public class ArticleManagedBean {
 	private List<Cluster> clusterList = new ArrayList<Cluster>();
 	private String searchString;
+	private int first;
+	public int getFirst() {
+		return first;
+	}
+
+	public void setFirst(int first) {
+		this.first = first;
+	}
+
 	private BeanData data = new DataTest();
 
 	public List<Cluster> getClusterList() {
 		return clusterList;
 	}
-
+	
 	public void setClusterList(List<Cluster> clusterList) {
 		this.clusterList = clusterList;
 	}
@@ -50,6 +59,23 @@ public class ArticleManagedBean {
 	
 	private void search(String searchString){
 	    setClusterList(data.getClusterList(searchString));
+	}
+	
+	public String weiter() {
+	    first = first + 1;
+	    if (first > clusterList.size()) {
+	        first = clusterList.size() - 1;
+	    }
+	    return null;
+	}
+	 
+	public String zurueck() {
+	    first = first - 1;
+	    if (first <= 0) {
+	        first = 1;
+	    }
+	     
+	    return null;
 	}
 	
 	public ArticleManagedBean(){

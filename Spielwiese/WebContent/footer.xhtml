@@ -8,7 +8,30 @@
 		 <div id="footer">
 		 <br/>
 		 <hr />
-			
-        </div>
+	<script type="text/javascript" class="init">
+	$(document).ready(function() {
+		$('#table').DataTable({
+			"ordering": false,
+			"searching": false,
+			"language": {
+	            "lengthMenu": "_MENU_ Elemente pro Seite anzeigen",
+	            "zeroRecords": "Keine Einträge gefunden.",
+	            "info": "Seite _PAGE_ von _PAGES_",
+	            "infoEmpty": "Keine Einträge gefunden.",
+	            "infoFiltered": "(aus _MAX_ gesamten Einträgen)",
+	            "paginate": {
+		            first:      "Erste",
+		            previous:   "Vorherige",
+		            next:       "Nächste",
+		            last:       "Letzte"
+		        }
+	        },
+	        
+			}
+		);
+		
+	} );
+	</script>
+</div>
 
 </html>
