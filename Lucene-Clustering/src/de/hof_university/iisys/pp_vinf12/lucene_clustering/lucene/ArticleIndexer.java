@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.de.GermanAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.IntField;
@@ -32,7 +32,7 @@ public class ArticleIndexer {
 		
 		SimpleFSDirectory dir = new SimpleFSDirectory(new File(path));
 		
-		Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_45);
+		Analyzer analyzer = new GermanAnalyzer(Version.LUCENE_45);
 		
 		IndexWriter writer = new IndexWriter(dir, new IndexWriterConfig(Version.LUCENE_45, analyzer));
 		
