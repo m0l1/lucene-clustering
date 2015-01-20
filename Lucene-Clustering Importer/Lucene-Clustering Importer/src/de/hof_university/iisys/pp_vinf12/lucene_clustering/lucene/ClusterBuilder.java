@@ -149,7 +149,7 @@ public class ClusterBuilder {
 				MoreLikeThis clmlt = new MoreLikeThis(clusterReader);
 				clmlt.setAnalyzer(analyzer);
 				clmlt.setFieldNames(new String[] {"clusterID"});
-				Query clquery = clmlt.like(new StringReader(article.getText()), null);
+				Query clquery = clmlt.like(new StringReader(articleDoc.getField("clusterID").stringValue()), null);
 				TopDocs clusterDocs = clusterSearcher.search(clquery, 5);
 				
 //				System.out.println("scoreDocs size: " + clusterDocs.scoreDocs.length);
@@ -160,7 +160,7 @@ public class ClusterBuilder {
 //				System.out.println("LSB ClusterHit: " + clusterSearcher.doc(clusterDocs.scoreDocs[0].doc).getField("clusterIDLSB").numericValue().longValue());
 				
 				Cluster cluster = null; 
-				if (clusterDocs.totalHits == 1 && 
+				if (clusterDocs.totalHits >= 1 && 
 //						clusterSearcher.doc(clusterDocs.scoreDocs[0].doc).getField("clusterIDLSB").numericValue().longValue() == lsb &&
 //						clusterSearcher.doc(clusterDocs.scoreDocs[0].doc).getField("clusterIDMSB").numericValue().longValue() == msb) {
 						clusterSearcher.doc(clusterDocs.scoreDocs[0].doc).getField("clusterID").stringValue().equals(articleDoc.getField("clusterID").stringValue())) {

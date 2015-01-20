@@ -32,6 +32,7 @@ public class ClusterIndexer {
 	
 	public void writeClusterToIndex(Cluster cluster) throws IOException{
 		
+		System.out.println("Cluster schreiben: id=" + cluster.getClusterId().toString());
 		Document doc = buildDoc(cluster);
 		writer.addDocument(doc);
 	}
