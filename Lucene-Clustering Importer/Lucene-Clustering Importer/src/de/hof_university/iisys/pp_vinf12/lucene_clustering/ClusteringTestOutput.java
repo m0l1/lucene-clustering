@@ -9,12 +9,14 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.NumericRangeQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.similarities.BM25Similarity;
 import org.apache.lucene.store.SimpleFSDirectory;
@@ -48,17 +50,17 @@ public class ClusteringTestOutput {
 
 //		ClusterIndexer clusterIndexer = new ClusterIndexer(clusterWriter, clusterSearcher);
 
-		Query query = NumericRangeQuery.newLongRange("clusterIDLSB", Long.MIN_VALUE, Long.MAX_VALUE, true, true);
-		TopDocs clusterDocs = clusterSearcher.search(query, 1000);		
+//		Query query = NumericRangeQuery.newLongRange("clusterIDLSB", Long.MIN_VALUE, Long.MAX_VALUE, true, true);
+//		Query query = new TermQuery(new Term("clusterID", "678bc33e-c3d3-4197-967e-2710bd283dc8"));
+//		TopDocs clusterDocs = clusterSearcher.search(query, 1000);
+//		System.out.println("Cluster hits: " + clusterDocs.totalHits);
 		
-		for (ScoreDoc scoreDoc : clusterDocs.scoreDocs) {
-			Document clusterDoc = clusterSearcher.doc(scoreDoc.doc);
-			long lsb = clusterDoc.getField("clusterIDLSB").numericValue().longValue();
-			long msb = clusterDoc.getField("clusterIDMSB").numericValue().longValue();
-			
-			BooleanQuery articleQuery = new BooleanQuery();
-			articleQuery.add(NumericRangeQuery.newLongRange("clusterIDLSB", lsb, lsb, true, true), BooleanClause.Occur.MUST);
-			articleQuery.add(NumericRangeQuery.newLongRange("clusterIDMSB", msb, msb, true, true), BooleanClause.Occur.MUST);
+		for (int i=0; i<clusterReader.maxDoc(); i++) {
+
+			Document doc = clusterReader.document(i);
+			String clusterId = doc.get("clusterID");
+
+			Query articleQuery = new TermQuery(new Term("clusterID", clusterId));
 			TopDocs articleDocs = articleSearcher.search(articleQuery, 1000);
 			
 			System.out.println("----------");

@@ -39,7 +39,6 @@ public class Cluster {
 	}
 	public void setClusterId(UUID clusterId) {
 		this.clusterId = clusterId;
-		System.out.println("ID in cluster: " + this.clusterId.toString());
 	}
 	public UUID getTopArticleId() {
 		return topArticleId;

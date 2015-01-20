@@ -110,7 +110,6 @@ public class Article {
 	}
 	public void setClusterID(UUID clusterID) {
 		this.clusterID = clusterID;
-		System.out.println("ClusterID in Article: " + this.clusterID.toString());
 	}
 
 	

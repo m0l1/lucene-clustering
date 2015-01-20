@@ -15,16 +15,11 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
-import org.apache.lucene.index.Term;
 import org.apache.lucene.queries.mlt.MoreLikeThis;
-import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.search.BooleanClause;
-import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.NumericRangeQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TermQuery;
+import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.similarities.BM25Similarity;
 import org.apache.lucene.store.SimpleFSDirectory;
@@ -50,28 +45,6 @@ public class ClusterBuilder {
 	}
 
 	public void buildClusters(List<Article> articles) throws IOException, ParseException {
-		
-//		Analyzer analyzer = new GermanAnalyzer(Version.LUCENE_45);
-//		
-//		SimpleFSDirectory articleDir = new SimpleFSDirectory(new File(articleIndex));
-//		IndexWriter articleWriter = new IndexWriter(articleDir, new IndexWriterConfig(Version.LUCENE_45, analyzer));
-//		DirectoryReader articleReader = DirectoryReader.open(articleWriter, true);
-//		IndexSearcher articleSearcher = new IndexSearcher(articleReader);
-//		articleSearcher.setSimilarity(new BM25Similarity());
-//		
-//		ArticleIndexer articleIndexer = new ArticleIndexer(articleWriter, articleSearcher);
-//		
-//		SimpleFSDirectory clusterDir = new SimpleFSDirectory(new File(clusterIndex));
-//		IndexWriter clusterWriter = new IndexWriter(clusterDir, new IndexWriterConfig(Version.LUCENE_45, analyzer));
-//		DirectoryReader clusterReader = DirectoryReader.open(clusterWriter, true);
-//		IndexSearcher clusterSearcher = new IndexSearcher(clusterReader);
-//		clusterSearcher.setSimilarity(new BM25Similarity());
-//		
-//		ClusterIndexer clusterIndexer = new ClusterIndexer(clusterWriter, clusterSearcher);
-//		
-//		MoreLikeThis mlt = new MoreLikeThis(articleReader);
-//		mlt.setAnalyzer(analyzer);
-//		mlt.setFieldNames(new String[] {"text"});
 		
 		for (Article article : articles) {
 			Analyzer analyzer = new GermanAnalyzer(Version.LUCENE_45);
@@ -99,11 +72,8 @@ public class ClusterBuilder {
 			Query query = mlt.like(new StringReader(article.getText()), null);
 			ScoreDoc[] docs = articleSearcher.search(query, toCompare).scoreDocs;
 			
-			System.out.println("Query-Treffer: " + docs.length);
-			
 			ScoreDoc maxDoc = null;
 			for (ScoreDoc scoreDoc : docs) {
-				System.out.println(scoreDoc.score);
 				if (scoreDoc.score > clusterScore && (maxDoc == null || scoreDoc.score > maxDoc.score)) {
 					maxDoc = scoreDoc;
 				}
@@ -112,9 +82,6 @@ public class ClusterBuilder {
 			GregorianCalendar now = new GregorianCalendar();
 			if (maxDoc == null) {
 				UUID id = UUID.randomUUID();
-				
-				System.out.println(" => neuer Cluster, id=" + id.toString());
-				System.out.println("    msb " + id.getMostSignificantBits() + " / lsb " + id.getLeastSignificantBits());
 				
 				Cluster cluster = new Cluster();
 				cluster.setClusterId(id);
@@ -125,72 +92,39 @@ public class ClusterBuilder {
 				article.setClusterID(id);
 				
 				clusterIndexer.writeClusterToIndex(cluster);
-				clusterWriter.commit();
 				articleIndexer.writeArticleToIndex(article);
-				articleWriter.commit();
 			}
 			else {
-				System.out.println(" => " + maxDoc.score);
 				Document articleDoc = articleSearcher.doc(maxDoc.doc);
-//				long msb = articleDoc.getField("clusterIDMSB").numericValue().longValue();
-//				long lsb = articleDoc.getField("clusterIDLSB").numericValue().longValue();
-//				UUID id = new UUID(msb, lsb);
 				
 				UUID id = UUID.fromString(articleDoc.getField("clusterID").stringValue());
 				
-//				BooleanQuery clusterQuery = new BooleanQuery();
-//				clusterQuery.add(NumericRangeQuery.newLongRange("clusterIDLSB", lsb, lsb, true, true), BooleanClause.Occur.MUST);
-//				clusterQuery.add(NumericRangeQuery.newLongRange("clusterIDMSB", msb, msb, true, true), BooleanClause.Occur.MUST);
-				
-				System.out.println("Query nach: " + articleDoc.getField("clusterID").stringValue());
-//				Query clusterQuery = new TermQuery(new Term("clusterID", articleDoc.getField("clusterID").stringValue()));
-				
-//				TopDocs clusterDocs = clusterSearcher.search(clusterQuery, 1);
-				MoreLikeThis clmlt = new MoreLikeThis(clusterReader);
-				clmlt.setAnalyzer(analyzer);
-				clmlt.setFieldNames(new String[] {"clusterID"});
-				Query clquery = clmlt.like(new StringReader(articleDoc.getField("clusterID").stringValue()), null);
-				TopDocs clusterDocs = clusterSearcher.search(clquery, 5);
-				
-//				System.out.println("scoreDocs size: " + clusterDocs.scoreDocs.length);
-				System.out.println("scoreDocs size: " + clusterDocs.scoreDocs.length);
-//				System.out.println("MSB ArticleHit: " + msb);
-//				System.out.println("LSB ArticleHit: " + lsb);
-//				System.out.println("MSB ClusterHit: " + clusterSearcher.doc(clusterDocs.scoreDocs[0].doc).getField("clusterIDMSB").numericValue().longValue());
-//				System.out.println("LSB ClusterHit: " + clusterSearcher.doc(clusterDocs.scoreDocs[0].doc).getField("clusterIDLSB").numericValue().longValue());
+				Query clusterQuery = TermRangeQuery.newStringRange("clusterID", articleDoc.getField("clusterID").stringValue(), articleDoc.getField("clusterID").stringValue(), true, true);
+				TopDocs clusterDocs = clusterSearcher.search(clusterQuery, 5);
 				
 				Cluster cluster = null; 
 				if (clusterDocs.totalHits >= 1 && 
-//						clusterSearcher.doc(clusterDocs.scoreDocs[0].doc).getField("clusterIDLSB").numericValue().longValue() == lsb &&
-//						clusterSearcher.doc(clusterDocs.scoreDocs[0].doc).getField("clusterIDMSB").numericValue().longValue() == msb) {
 						clusterSearcher.doc(clusterDocs.scoreDocs[0].doc).getField("clusterID").stringValue().equals(articleDoc.getField("clusterID").stringValue())) {
 					
 					Document clusterDoc = clusterSearcher.doc(clusterDocs.scoreDocs[0].doc);
 					
 					cluster = new Cluster();
 					cluster.setClusterId(id);
-//					cluster.setTopArticleId(new UUID(
-//							clusterDoc.getField("articleIDMSB").numericValue().longValue(),
-//							clusterDoc.getField("articleIDLSB").numericValue().longValue()));
-					cluster.setTopArticleId(UUID.fromString(clusterDoc.getField("articleID").stringValue()));
+					cluster.setTopArticleId(UUID.fromString(clusterDoc.getField("topArticleID").stringValue()));
 					GregorianCalendar created = new GregorianCalendar();
 					created.setTime(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(clusterDoc.getField("created").stringValue()));
 					cluster.setCreated(created);
 					cluster.setLastChange(now);
 						
-					clusterIndexer.writeClusterToIndex(cluster);
-					clusterWriter.commit();
+					clusterIndexer.updateCluster(cluster);
 					
-					System.out.println("ClusterID in ClusterBuilder: " + id.toString());
 					article.setClusterID(id);
 				}
 				else {
-					System.out.println("FEHLER: Cluster nicht gefunden");
 					// TODO - was machen?!? -> passende Exception und loggen?
 				}				
 				
 				articleIndexer.writeArticleToIndex(article);
-				articleWriter.commit();
 			}
 			
 			clusterReader.close();
@@ -198,10 +132,5 @@ public class ClusterBuilder {
 			articleReader.close();
 			articleWriter.close();
 		}
-		
-//		clusterReader.close();
-//		clusterWriter.close();
-//		articleReader.close();
-//		articleWriter.close();
 	}
 }
