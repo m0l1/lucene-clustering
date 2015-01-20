@@ -17,6 +17,7 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.similarities.BM25Similarity;
 import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.util.Version;
 
@@ -65,6 +66,7 @@ public class Test {
 		SimpleFSDirectory dir = new SimpleFSDirectory(new File("lucene.index"));
 		DirectoryReader reader = DirectoryReader.open(dir);
 		IndexSearcher searcher = new IndexSearcher(reader);
+		searcher.setSimilarity(new BM25Similarity());
 		Analyzer analyzer = new GermanAnalyzer(Version.LUCENE_45);
 //		QueryParser queryParser = new QueryParser(Version.LUCENE_45, "title", analyzer);
 //		
@@ -87,10 +89,9 @@ public class Test {
 			System.out.println(article.getSource() + " // " + article.getTitle());
 			System.out.println("\t" + docs.length + " Ähnliche");
 			for (ScoreDoc doc : docs) {
-				System.out.println("\t - " + searcher.doc(doc.doc).get("source") + " // " + searcher.doc(doc.doc).get("title"));
+				System.out.println("\t(" + doc.score + ") - " + searcher.doc(doc.doc).get("source") + " // " + searcher.doc(doc.doc).get("title"));
 			}
 			System.out.println();
 		}
 	}
-
 }
