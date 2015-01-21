@@ -1,17 +1,10 @@
 package de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.lucene;
 
-import java.io.File;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
-import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.MatchAllDocsQuery;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.search.similarities.BM25Similarity;
-import org.apache.lucene.store.SimpleFSDirectory;
+import javax.naming.OperationNotSupportedException;
 
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data.Cluster;
 
@@ -23,21 +16,28 @@ public class BeanDataImpl implements BeanData {
 	@Override
 	public List<Cluster> getClusterList() {
 		
-		
-		
-		return null;
+		ClusterAssembler assembler = new ClusterAssembler(articleIndex, clusterIndex);
+		List<Cluster> clusters = null;
+		try {
+			clusters = assembler.getAllClusters();
+		} catch (IOException e) {
+			// TODO Logging
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Logging
+			e.printStackTrace();
+		}
+		return clusters;
 	}
 
 	@Override
 	public List<Cluster> getClusterList(String searchString) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException(new OperationNotSupportedException());
 	}
 
 	@Override
 	public List<Cluster> getEqualClusterList() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException(new OperationNotSupportedException());
 	}
 
 }

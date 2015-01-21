@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
 
 import org.apache.lucene.document.Document;
@@ -25,9 +24,11 @@ import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data.Cluster;
 public class ClusterAssembler {
 	
 	private String clusterIndex;
+	private ArticleAssembler articleAssembler;
 	
-	public ClusterAssembler(String clusterIndex) {
+	public ClusterAssembler(String articleIndex, String clusterIndex) {
 		this.clusterIndex = clusterIndex;
+		this.articleAssembler = new ArticleAssembler(articleIndex);
 	}
 	
 	public List<Cluster> getAllClusters() throws IOException, ParseException {
@@ -44,14 +45,23 @@ public class ClusterAssembler {
 		
 		for (ScoreDoc clusterDoc : clusterDocs) {
 			Document doc = clusterSearcher.doc(clusterDoc.doc);
-			Cluster cluster = new Cluster();
-			cluster.setClusterId(UUID.fromString(doc.getField("clusterID").stringValue()));
-			cluster.setCreated(parseDate(doc.getField("created").stringValue()));
-			cluster.setLastChange(parseDate(doc.getField("lastChanged").stringValue()));
-			
+			clusters.add(buildCluster(doc));		
 		}
 		
 		return clusters;
+	}
+	
+	private Cluster buildCluster(Document doc) throws ParseException, IOException {
+		Cluster cluster = new Cluster();
+		cluster.setClusterId(UUID.fromString(doc.getField("clusterID").stringValue()));
+		cluster.setCreated(parseDate(doc.getField("created").stringValue()));
+		cluster.setLastChange(parseDate(doc.getField("lastChanged").stringValue()));
+		cluster.setTopArticle(articleAssembler.getArticle(doc.getField("topArticleID").stringValue()));
+		cluster.setArticles(articleAssembler.getArticles(
+				doc.getField("clusterID").stringValue(),
+				doc.getField("topArticleID").stringValue()));
+		
+		return cluster;
 	}
 
 	private GregorianCalendar parseDate(String dateString) throws ParseException {
