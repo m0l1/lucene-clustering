@@ -7,6 +7,7 @@ import java.util.List;
 import javax.naming.OperationNotSupportedException;
 
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data.Cluster;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data.ClusterComparator;
 
 public class BeanDataImpl implements BeanData {
 	
@@ -27,6 +28,8 @@ public class BeanDataImpl implements BeanData {
 			// TODO Logging
 			e.printStackTrace();
 		}
+		
+		clusters.sort(new ClusterComparator());
 		return clusters;
 	}
 
