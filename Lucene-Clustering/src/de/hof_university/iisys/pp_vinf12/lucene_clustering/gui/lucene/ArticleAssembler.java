@@ -2,8 +2,13 @@ package de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.lucene;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
@@ -26,7 +31,7 @@ public class ArticleAssembler {
 		this.articleIndex = articleIndex;
 	}
 
-	public Article getArticle(String articleID) throws IOException {
+	public Article getArticle(String articleID) throws IOException, ParseException {
 		
 		SimpleFSDirectory articleDir = new SimpleFSDirectory(new File(articleIndex));
 		DirectoryReader articleReader = DirectoryReader.open(articleDir);
@@ -41,7 +46,7 @@ public class ArticleAssembler {
 		return buildArticle(doc);
 	}
 
-	public List<Article> getArticles(String clusterID, String topArticleID) throws IOException {
+	public List<Article> getArticles(String clusterID, String topArticleID) throws IOException, ParseException {
 		List<Article> articles = new ArrayList<Article>();
 		
 		SimpleFSDirectory articleDir = new SimpleFSDirectory(new File(articleIndex));
@@ -65,9 +70,28 @@ public class ArticleAssembler {
 		return articles;
 	}
 
-	private Article buildArticle(Document doc) {
-		// TODO Auto-generated method stub
-		return null;
+	private Article buildArticle(Document doc) throws ParseException {
+		Article article = new Article();
+		
+		article.setArticleID(UUID.fromString(doc.getField("articleID").stringValue()));
+		article.setTitle(doc.getField("title").stringValue());
+		article.setDescription(doc.getField("description").stringValue());
+		article.setSource(doc.getField("source").stringValue());
+		article.setLanguage(doc.getField("language").stringValue());
+		article.setLogo(doc.getField("logo").stringValue());
+		article.setLink(doc.getField("link").stringValue());
+		article.setDescription(doc.getField("description").stringValue());
+		article.setDate(parseDate(doc.getField("date").stringValue()));
+		
+		return article;
 	}
 
+	private GregorianCalendar parseDate(String dateString) throws ParseException {
+		GregorianCalendar calendar = new GregorianCalendar();
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		date = simpleDateFormat.parse(dateString);
+		calendar.setTime(date);
+		return calendar;
+	}
 }

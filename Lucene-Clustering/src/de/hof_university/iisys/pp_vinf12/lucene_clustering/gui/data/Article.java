@@ -15,7 +15,6 @@ public class Article {
 	private String description;
 	private String source;
 	private String language;
-	private String text;
 	private String logo = "/resources/default.jpg";
 	private String link;
 	private GregorianCalendar date;
@@ -75,12 +74,6 @@ public class Article {
 	}
 	public void setLanguage(String language) {
 		this.language = language;
-	}
-	public String getText() {
-		return text;
-	}
-	public void setText(String text) {
-		this.text = text;
 	}
 	
 	//Defaultwert für XML-Dateien die kein Logo haben, setzen
