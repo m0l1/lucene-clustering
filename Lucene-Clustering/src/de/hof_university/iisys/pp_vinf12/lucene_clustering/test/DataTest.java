@@ -2,8 +2,8 @@ package de.hof_university.iisys.pp_vinf12.lucene_clustering.test;
 
 import java.util.*;
 
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.data.*;
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.lucene.BeanData;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data.*;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.lucene.BeanData;
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.xml.XMLParser;
 
 //@author mlouis doeckl

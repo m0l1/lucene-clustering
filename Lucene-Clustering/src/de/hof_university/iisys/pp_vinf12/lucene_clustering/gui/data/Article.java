@@ -1,4 +1,4 @@
-package de.hof_university.iisys.pp_vinf12.lucene_clustering.data;
+package de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data;
 
 import java.util.GregorianCalendar;
 import java.util.UUID;
@@ -19,7 +19,6 @@ public class Article {
 	private String logo = "/resources/default.jpg";
 	private String link;
 	private GregorianCalendar date;
-	private UUID clusterID;
 
 	//Wird für XML-Parser benötigt!
 //	public Article(){
@@ -104,13 +103,5 @@ public class Article {
 	public void setDate(GregorianCalendar date) {
 		this.date = date;
 	}
-	
-	public UUID getClusterID() {
-		return clusterID;
-	}
-	public void setClusterID(UUID clusterID) {
-		this.clusterID = clusterID;
-	}
-
 	
 }

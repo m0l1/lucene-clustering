@@ -1,4 +1,4 @@
-package de.hof_university.iisys.pp_vinf12.lucene_clustering.data;
+package de.hof_university.iisys.pp_vinf12.lucene_clustering.importer.data;
 
 import java.util.GregorianCalendar;
 import java.util.List;

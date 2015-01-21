@@ -1,4 +1,4 @@
-package de.hof_university.iisys.pp_vinf12.lucene_clustering.xml;
+package de.hof_university.iisys.pp_vinf12.lucene_clustering.importer.xml;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,6 @@ public class RecursiveFileLister {
 	
 	//Speichert alle Dateien aller Unterordner in der Liste fileList
 	private void listFiles(File[] files) {
-		System.out.println("listFiles");
 	    for (File file : files) {
 	        if (file.isDirectory()) {
 	            listFiles(file.listFiles()); 

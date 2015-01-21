@@ -1,4 +1,4 @@
-package de.hof_university.iisys.pp_vinf12.lucene_clustering;
+package de.hof_university.iisys.pp_vinf12.lucene_clustering.importer;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,13 +1,13 @@
-package de.hof_university.iisys.pp_vinf12.lucene_clustering;
+package de.hof_university.iisys.pp_vinf12.lucene_clustering.importer;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.data.Article;
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.lucene.ClusterBuilder;
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.xml.ArticleImporter;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.importer.data.Article;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.importer.lucene.ClusterBuilder;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.importer.xml.ArticleImporter;
 
 public class LuceneImporter {
 

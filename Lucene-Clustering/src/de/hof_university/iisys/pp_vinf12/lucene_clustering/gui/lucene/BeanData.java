@@ -1,8 +1,8 @@
-package de.hof_university.iisys.pp_vinf12.lucene_clustering.lucene;
+package de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.lucene;
 
 import java.util.List;
 
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.data.Cluster;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data.Cluster;
 
 public interface BeanData {
 	//Methode um die geclusterten Artikel für die Hauptseite zu bekommen

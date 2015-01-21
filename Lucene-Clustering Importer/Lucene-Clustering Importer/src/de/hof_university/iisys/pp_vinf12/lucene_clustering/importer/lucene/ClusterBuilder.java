@@ -1,4 +1,4 @@
-package de.hof_university.iisys.pp_vinf12.lucene_clustering.lucene;
+package de.hof_university.iisys.pp_vinf12.lucene_clustering.importer.lucene;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,8 +25,8 @@ import org.apache.lucene.search.similarities.BM25Similarity;
 import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.util.Version;
 
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.data.Article;
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.data.Cluster;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.importer.data.Article;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.importer.data.Cluster;
 
 public class ClusterBuilder {
 	

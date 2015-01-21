@@ -1,4 +1,4 @@
-package de.hof_university.iisys.pp_vinf12.lucene_clustering.lucene;
+package de.hof_university.iisys.pp_vinf12.lucene_clustering.importer.lucene;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -13,7 +13,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.search.TopDocs;
 
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.data.Cluster;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.importer.data.Cluster;
 
 public class ClusterIndexer {
 

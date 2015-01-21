@@ -7,9 +7,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.event.ValueChangeEvent;
 
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.data.Article;
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.data.Cluster;
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.lucene.BeanData;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data.Article;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data.Cluster;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.lucene.BeanData;
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.test.DataTest;
 
 @RequestScoped

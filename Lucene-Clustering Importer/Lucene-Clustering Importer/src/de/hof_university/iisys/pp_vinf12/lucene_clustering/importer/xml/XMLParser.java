@@ -1,4 +1,4 @@
-package de.hof_university.iisys.pp_vinf12.lucene_clustering.xml;
+package de.hof_university.iisys.pp_vinf12.lucene_clustering.importer.xml;
 
 
 // @author Maximilian Louis, Dominick Oeckel
@@ -19,7 +19,7 @@ import org.jdom2.Element;
 import org.jdom2.input.DOMBuilder;
 import org.xml.sax.SAXException;
 
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.data.Article;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.importer.data.Article;
 
 public class XMLParser {
 	
