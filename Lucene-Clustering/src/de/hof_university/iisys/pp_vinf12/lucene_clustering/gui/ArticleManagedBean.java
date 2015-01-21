@@ -7,10 +7,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.event.ValueChangeEvent;
 
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data.Article;
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data.Cluster;
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.lucene.BeanData;
-import de.hof_university.iisys.pp_vinf12.lucene_clustering.test.DataTest;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.lucene.BeanDataImpl;
 
 @RequestScoped
 @ManagedBean(name="amb")
@@ -26,7 +25,7 @@ public class ArticleManagedBean {
 		this.first = first;
 	}
 
-	private BeanData data = new DataTest();
+	private BeanData data = new BeanDataImpl();
 
 	public List<Cluster> getClusterList() {
 		return clusterList;
