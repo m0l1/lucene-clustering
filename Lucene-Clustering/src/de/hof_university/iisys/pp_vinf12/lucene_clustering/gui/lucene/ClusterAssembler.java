@@ -55,7 +55,7 @@ public class ClusterAssembler {
 		Cluster cluster = new Cluster();
 		cluster.setClusterId(UUID.fromString(doc.getField("clusterID").stringValue()));
 		cluster.setCreated(parseDate(doc.getField("created").stringValue()));
-		cluster.setLastChange(parseDate(doc.getField("lastChanged").stringValue()));
+		cluster.setLastChange(parseDate(doc.getField("lastChange").stringValue()));
 		cluster.setTopArticle(articleAssembler.getArticle(doc.getField("topArticleID").stringValue()));
 		cluster.setArticles(articleAssembler.getArticles(
 				doc.getField("clusterID").stringValue(),

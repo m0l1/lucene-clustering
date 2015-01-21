@@ -10,8 +10,8 @@ import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data.Cluster;
 
 public class BeanDataImpl implements BeanData {
 	
-	String articleIndex = "articles.lucene";
-	String clusterIndex = "clusters.lucene";
+	String articleIndex = "C:/Program Files/Development/eclipse 4.3.2/articles.lucene";
+	String clusterIndex = "C:/Program Files/Development/eclipse 4.3.2/clusters.lucene";
 
 	@Override
 	public List<Cluster> getClusterList() {
