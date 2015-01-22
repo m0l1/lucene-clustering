@@ -107,7 +107,6 @@ public class ClusterBuilder {
 					else {
 						article.setIdentical(UUID.fromString(articleDoc.getField("articleID").stringValue()));
 					}
-					System.out.println("Identität!");
 				}
 				
 				Query clusterQuery = TermRangeQuery.newStringRange("clusterID", articleDoc.getField("clusterID").stringValue(), articleDoc.getField("clusterID").stringValue(), true, true);

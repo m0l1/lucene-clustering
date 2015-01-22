@@ -119,7 +119,6 @@ public class ArticleAssembler {
 			articles.add(buildArticle(doc));
 		}
 		
-		System.out.println("IdentityArticles size: " + articles.size());
 		return articles;
 	}
 
@@ -153,8 +152,6 @@ public class ArticleAssembler {
 				articles.add(buildArticle(doc));
 			}
 		}
-		
-		System.out.println("IdentityTopArticles size: " + articles.size());
 				
 		return articles;
 	}

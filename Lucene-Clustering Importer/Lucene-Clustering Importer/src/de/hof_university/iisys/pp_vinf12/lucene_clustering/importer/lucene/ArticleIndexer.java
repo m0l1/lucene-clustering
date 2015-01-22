@@ -72,7 +72,6 @@ public class ArticleIndexer {
 		doc.add(new StringField("clusterID", article.getClusterID().toString(), Field.Store.YES));
 		if (article.getIdentical() != null) {
 			doc.add(new StringField("identical", article.getIdentical().toString(), Field.Store.YES));
-			System.out.println("Identität eingetragen.");
 		}
 		else {
 			doc.add(new StringField("identical", "", Field.Store.YES));
