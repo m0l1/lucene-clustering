@@ -111,7 +111,7 @@ public class ArticleAssembler {
 		IndexSearcher articleSearcher = new IndexSearcher(articleReader);
 		articleSearcher.setSimilarity(new BM25Similarity());
 		
-		Query articleQuery = new TermQuery(new Term("similarity", articleID));
+		Query articleQuery = new TermQuery(new Term("identical", articleID));
 		ScoreDoc[] articleDocs = articleSearcher.search(articleQuery, articleReader.numDocs()).scoreDocs;
 		
 		for (ScoreDoc articleDoc : articleDocs) {
@@ -119,6 +119,7 @@ public class ArticleAssembler {
 			articles.add(buildArticle(doc));
 		}
 		
+		System.out.println("IdentityArticles size: " + articles.size());
 		return articles;
 	}
 
@@ -152,6 +153,8 @@ public class ArticleAssembler {
 				articles.add(buildArticle(doc));
 			}
 		}
+		
+		System.out.println("IdentityTopArticles size: " + articles.size());
 				
 		return articles;
 	}

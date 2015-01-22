@@ -80,6 +80,8 @@ public class ClusterAssembler {
 			}
 		}
 		
+		System.out.println("Clusters size: " + clusters.size());
+		
 		return clusters;
 	}
 	
