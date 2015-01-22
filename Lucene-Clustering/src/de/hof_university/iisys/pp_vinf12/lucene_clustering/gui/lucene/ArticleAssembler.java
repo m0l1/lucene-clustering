@@ -7,13 +7,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermQuery;
@@ -43,6 +46,10 @@ public class ArticleAssembler {
 		
 		Document doc = articleSearcher.doc(articleDocs[0].doc);
 		
+		return buildArticle(doc);
+	}
+	
+	public Article getArticle(Document doc) throws ParseException {
 		return buildArticle(doc);
 	}
 
@@ -93,5 +100,59 @@ public class ArticleAssembler {
 		date = simpleDateFormat.parse(dateString);
 		calendar.setTime(date);
 		return calendar;
+	}
+
+	public List<Article> getIdentityArticles(String articleID) throws IOException, ParseException {
+		
+		List<Article> articles = new ArrayList<Article>();
+		
+		SimpleFSDirectory articleDir = new SimpleFSDirectory(new File(articleIndex));
+		DirectoryReader articleReader = DirectoryReader.open(articleDir);
+		IndexSearcher articleSearcher = new IndexSearcher(articleReader);
+		articleSearcher.setSimilarity(new BM25Similarity());
+		
+		Query articleQuery = new TermQuery(new Term("similarity", articleID));
+		ScoreDoc[] articleDocs = articleSearcher.search(articleQuery, articleReader.numDocs()).scoreDocs;
+		
+		for (ScoreDoc articleDoc : articleDocs) {
+			Document doc = articleSearcher.doc(articleDoc.doc);
+			articles.add(buildArticle(doc));
+		}
+		
+		return articles;
+	}
+
+	public List<Article> getIdentityTopArticles() throws IOException, ParseException {
+		
+		Set<String> ids = new HashSet<String>();
+		List<Article> articles = new ArrayList<Article>();
+		
+		SimpleFSDirectory articleDir = new SimpleFSDirectory(new File(articleIndex));
+		DirectoryReader articleReader = DirectoryReader.open(articleDir);
+		IndexSearcher articleSearcher = new IndexSearcher(articleReader);
+		articleSearcher.setSimilarity(new BM25Similarity());
+		
+		Query articleQuery = new MatchAllDocsQuery();
+		ScoreDoc[] articleDocs = articleSearcher.search(articleQuery, articleReader.numDocs()).scoreDocs;
+		
+		for (ScoreDoc articleDoc : articleDocs) {
+			Document doc = articleSearcher.doc(articleDoc.doc);
+			String id = doc.getField("identical").stringValue();
+			if (id != null && id.length() > 0) {
+				ids.add(id);
+			}
+		}
+		
+		for (String id : ids) {
+			articleQuery = new TermQuery(new Term("articleID", id));
+			articleDocs = articleSearcher.search(articleQuery, 1).scoreDocs;
+			
+			for (ScoreDoc articleDoc : articleDocs) {
+				Document doc = articleSearcher.doc(articleDoc.doc);
+				articles.add(buildArticle(doc));
+			}
+		}
+				
+		return articles;
 	}
 }

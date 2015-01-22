@@ -15,6 +15,9 @@ public class ClusterComparator implements Comparator<Cluster> {
 	@Override
 	public int compare(Cluster o1, Cluster o2) {
 		
+		if (o1 == null || o2 == null) {
+			return 0;
+		}
 		return -(o1.getLastChange().compareTo(o2.getLastChange()));
 	}
 

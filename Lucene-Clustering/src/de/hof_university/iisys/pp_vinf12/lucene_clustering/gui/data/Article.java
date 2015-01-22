@@ -97,4 +97,14 @@ public class Article {
 		this.date = date;
 	}
 	
+	/*
+	 * Equals-Methode fuer Verwendung durch Set ueberschrieben
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof Article)) return false;
+		Article article = (Article) o;
+		return articleID.equals(article.getArticleID());
+	}
 }

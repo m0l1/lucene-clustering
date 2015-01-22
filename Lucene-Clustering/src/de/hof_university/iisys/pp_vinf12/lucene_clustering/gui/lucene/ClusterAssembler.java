@@ -19,6 +19,8 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.similarities.BM25Similarity;
 import org.apache.lucene.store.SimpleFSDirectory;
 
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data.Article;
+import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data.ArticleComparator;
 import de.hof_university.iisys.pp_vinf12.lucene_clustering.gui.data.Cluster;
 
 public class ClusterAssembler {
@@ -57,10 +59,46 @@ public class ClusterAssembler {
 		cluster.setCreated(parseDate(doc.getField("created").stringValue()));
 		cluster.setLastChange(parseDate(doc.getField("lastChange").stringValue()));
 		cluster.setTopArticle(articleAssembler.getArticle(doc.getField("topArticleID").stringValue()));
-		cluster.setArticles(articleAssembler.getArticles(
+		List<Article> articles = articleAssembler.getArticles(
 				doc.getField("clusterID").stringValue(),
-				doc.getField("topArticleID").stringValue()));
+				doc.getField("topArticleID").stringValue());
+		articles.sort(new ArticleComparator());
+		cluster.setArticles(articles);
 		
+		return cluster;
+	}
+	
+	public List<Cluster> getIdentityClusters() throws ParseException, IOException {
+		
+		List<Cluster> clusters = new ArrayList<Cluster>();
+		List<Article> topArticles = articleAssembler.getIdentityTopArticles();
+		
+		for (Article topArticle : topArticles) {
+			Cluster cluster = buildIdentityCluster(topArticle);
+			if (cluster != null) {
+				clusters.add(cluster);
+			}
+		}
+		
+		return clusters;
+	}
+	
+	private Cluster buildIdentityCluster(Article article) throws ParseException, IOException {
+		
+		Cluster cluster = null;
+		List<Article> articles = articleAssembler.getIdentityArticles(
+				article.getArticleID().toString());
+		articles.sort(new ArticleComparator());
+		
+		if (articles.size() > 0) {
+			cluster = new Cluster();
+			cluster.setTopArticle(article);
+			cluster.setClusterId(article.getArticleID());
+			cluster.setCreated(article.getDate());
+			cluster.setLastChange(articles.get(0).getDate());
+			cluster.setArticles(articles);
+		}
+
 		return cluster;
 	}
 
