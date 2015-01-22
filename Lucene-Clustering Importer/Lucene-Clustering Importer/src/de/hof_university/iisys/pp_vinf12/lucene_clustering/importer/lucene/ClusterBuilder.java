@@ -100,7 +100,13 @@ public class ClusterBuilder {
 				UUID id = UUID.fromString(articleDoc.getField("clusterID").stringValue());
 				
 				if (maxDoc.score > identityScore) {
-					article.setIdentical(UUID.fromString(articleDoc.getField("articleID").stringValue()));
+					String identical = articleDoc.getField("identical").stringValue();
+					if (identical != null && identical.length() > 0) {
+						article.setIdentical(UUID.fromString(identical));
+					}
+					else {
+						article.setIdentical(UUID.fromString(articleDoc.getField("articleID").stringValue()));
+					}
 					System.out.println("Identität!");
 				}
 				
