@@ -70,6 +70,13 @@ public class ArticleIndexer {
 		doc.add(new StringField("date", new SimpleDateFormat
 				("yyyy/MM/dd HH:mm:ss").format(article.getDate().getTime()), Field.Store.YES));
 		doc.add(new StringField("clusterID", article.getClusterID().toString(), Field.Store.YES));
+		if (article.getIdentical() != null) {
+			doc.add(new StringField("identical", article.getIdentical().toString(), Field.Store.YES));
+			System.out.println("Identität eingetragen.");
+		}
+		else {
+			doc.add(new StringField("identical", "", Field.Store.YES));
+		}
 		
 		return doc;
 	}

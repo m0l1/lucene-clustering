@@ -20,6 +20,7 @@ public class Article {
 	private String link;
 	private GregorianCalendar date;
 	private UUID clusterID;
+	private UUID identical;
 
 	//Wird für XML-Parser benötigt!
 //	public Article(){
@@ -111,6 +112,12 @@ public class Article {
 	public void setClusterID(UUID clusterID) {
 		this.clusterID = clusterID;
 	}
-
 	
+	public UUID getIdentical() {
+		return identical;
+	}
+	
+	public void setIdentical(UUID identical) {
+		this.identical = identical;
+	}	
 }

@@ -87,7 +87,7 @@ public class ClusterBuilder {
 				cluster.setClusterId(id);
 				cluster.setTopArticleId(article.getArticleID());
 				cluster.setCreated(now);
-				cluster.setLastChange(now);
+				cluster.setLastChange(article.getDate());
 				
 				article.setClusterID(id);
 				
@@ -98,6 +98,11 @@ public class ClusterBuilder {
 				Document articleDoc = articleSearcher.doc(maxDoc.doc);
 				
 				UUID id = UUID.fromString(articleDoc.getField("clusterID").stringValue());
+				
+				if (maxDoc.score > identityScore) {
+					article.setIdentical(UUID.fromString(articleDoc.getField("articleID").stringValue()));
+					System.out.println("Identität!");
+				}
 				
 				Query clusterQuery = TermRangeQuery.newStringRange("clusterID", articleDoc.getField("clusterID").stringValue(), articleDoc.getField("clusterID").stringValue(), true, true);
 				TopDocs clusterDocs = clusterSearcher.search(clusterQuery, 5);
@@ -114,7 +119,7 @@ public class ClusterBuilder {
 					GregorianCalendar created = new GregorianCalendar();
 					created.setTime(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(clusterDoc.getField("created").stringValue()));
 					cluster.setCreated(created);
-					cluster.setLastChange(now);
+					cluster.setLastChange(article.getDate());
 						
 					clusterIndexer.updateCluster(cluster);
 					
